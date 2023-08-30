@@ -98,13 +98,13 @@ function checkOptions (options) {
                 if (key === 'outDir' && result.outDir[result.outDir.length - 1] !== '/') result.outDir += '/';
                 break;
 
-            case typeof OPTIONS[key] === 'object' && !Array.isArray(OPTIONS[key]):
+            case typeof OPTIONS[key] === 'object' && !Array.isArray(OPTIONS[key]) && typeof options[key] === 'object' && !Array.isArray(options[key]):
                 for (let objectKey in OPTIONS.minifyOptions) {
                     if (typeof options[key][objectKey] === 'boolean') result[key][objectKey] = options[key][objectKey];
                 }
                 break;
 
-            case typeof OPTIONS[key] === 'object' && Array.isArray(OPTIONS[key]):
+            case typeof OPTIONS[key] === 'object' && Array.isArray(OPTIONS[key]) && typeof options[key] === 'object' && Array.isArray(options[key]):
                 switch (key) {
                     case 'targets':
                         options.targets.forEach(element => {
