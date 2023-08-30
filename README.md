@@ -38,16 +38,16 @@ export default defineConfig ({
     // Terser minify options, https://github.com/terser/html-minifier-terser
     minifyOptions: {
         collapseWhitespace: true,
-            html5: true,
-            keepClosingSlash: true,
-            minifyCSS: true,
-            minifyJS: true,
-            removeAttributeQuotes: true,
-            removeComments: true,
-            removeRedundantAttributes: true,
-            removeScriptTypeAttributes: true,
-            removeStyleLinkTypeAttributes: true,
-            useShortDoctype: true,
+        html5: true,
+        keepClosingSlash: true,
+        minifyCSS: true,
+        minifyJS: true,
+        removeAttributeQuotes: true,
+        removeComments: true,
+        removeRedundantAttributes: true,
+        removeScriptTypeAttributes: true,
+        removeStyleLinkTypeAttributes: true,
+        useShortDoctype: true,
     },
 
     // List of files to process.
