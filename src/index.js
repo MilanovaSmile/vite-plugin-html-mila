@@ -3,11 +3,11 @@ import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { cyan, green, red, dim, bold } from 'colorette';
 import { minify } from 'html-minifier-terser';
 
-
 const OPTIONS = {
     verbose: true,
     outDir: '',
     minify: true,
+    minifyImport: true,
     minifyOptions: {
         collapseWhitespace: true,
         html5: true,
@@ -43,7 +43,24 @@ export function HtmlMila (options = OPTIONS) {
         configResolved(extConfig) {
             config = extConfig;
         },
+        async transform (code, id) {
+            if (!options.minifyImport) return;
+
+            if (id.endsWith('.html?raw')) {
+                code = code.substring(16).slice(0, -1);
+                code = code.replaceAll('\\n', '');
+                code = code.replaceAll('\\"', '"');
+
+                code = await minify(code, options.minifyOptions);
+
+                return {
+                    code: `export default '${code}'`
+                }
+            }
+        },
         async closeBundle() {
+            if (options.targets.length === 0) return;
+
             await new Promise((resolve) => {
                 setTimeout(() => resolve(), 1);
             });
