@@ -1,6 +1,10 @@
 # Description
 
-Vite plugin to copy and minify HTML. Terser is used for minification.
+Vite plugin for minimizing html, with the ability to copy html files. Terser is used for minification.
+
+- Minifies HTML when imported in JS files.
+- Minifies third-party HTML files.
+- Copies third-party HTML files.
 
 # Install
 
@@ -15,7 +19,12 @@ import { defineConfig } from 'vite';
 import { HtmlMila } from 'vite-plugin-html-mila';
 
 export default defineConfig ({
+    /**
+     * Root directory.
+     * Required.
+     */
     root: './src',
+    
     plugins: [
         HtmlMila(/* options */)
     ]
@@ -26,16 +35,34 @@ export default defineConfig ({
 
 ```javascript
 {
-    // Write debug to console.
+    /**
+     * Write debug to console.
+     * Default: true.
+     */
     verbose: true,
 
-    // Path to output directory.
+    /**
+     * Path to output directory.
+     * Required.
+     */
     outDir: '../dist',
 
-    // Minify HTML
+    /**
+     * Minify HTML file from targets.
+     * Default: true.
+     */
     minify: true,
 
-    // Terser minify options, https://github.com/terser/html-minifier-terser
+    /**
+     * Minify HTML file from import in JS files.
+     * Example: import html from './index.html?raw'
+     * Default: true.
+     */
+    minifyImport: true,
+
+    /** Terser minify options, https://github.com/terser/html-minifier-terser
+     * Default: true for all.
+     */
     minifyOptions: {
         collapseWhitespace: true,
         html5: true,
@@ -50,10 +77,13 @@ export default defineConfig ({
         useShortDoctype: true,
     },
 
-    // List of files to process.
-    // src - path relative to the "root" variable.
-    // dest - path relative to "outDir" variable.
-    // src, dest - can only contain a string!
+    /**
+     * List of files to process.
+     * src - path relative to the "root" variable.
+     * dest - path relative to "outDir" variable.
+     * src, dest - can only contain a string!
+     * Default: [].
+     */
     targets: [
         { src: 'target1.html',         dest: 'target1.html' },
         { src: 'example/target2.html', dest: 'example/target2.html' }
