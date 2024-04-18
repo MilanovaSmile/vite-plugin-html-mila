@@ -2,7 +2,9 @@ import path from 'path';
 import { defineConfig } from 'vite';
 
 export default defineConfig({
+    root: './src',
     build: {
+        outDir: '../dist',
         lib: {
             entry: path.resolve(__dirname, './src/index.js'),
             name: 'HtmlMila',
@@ -15,6 +17,6 @@ export default defineConfig({
                 'colorette',
                 'html-minifier-terser'
             ]
-        }
+        },
     }
 });

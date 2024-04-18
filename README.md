@@ -79,14 +79,11 @@ export default defineConfig ({
 
     /**
      * List of files to process.
-     * src - path relative to the "root" variable.
-     * dest - path relative to "outDir" variable.
-     * src, dest - can only contain a string!
-     * Default: [].
+     * Default: {}.
      */
-    targets: [
-        { src: 'target1.html',         dest: 'target1.html' },
-        { src: 'example/target2.html', dest: 'example/target2.html' }
-    ]
+    targets: {
+        'target.html'        : 'source.html',
+        'example/target.html': 'example/source.html'
+    }
 }
 ```
